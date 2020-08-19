@@ -10,6 +10,7 @@ public class SortingTester {
         for(int i = 0; i < arraySize; i++) {
             arr[i] = (int)(Math.random()*arraySize);
         }
+//        arr = new int[] {3,0,3,0,1};
     }
     public void sortingTest(SorterType type) {
         System.out.println("------------------------------------------------------------------------------");
