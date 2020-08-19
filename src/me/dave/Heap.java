@@ -6,7 +6,7 @@ public class Heap {
     private ArrayList<Integer> nodeList;
     public Heap() {
         this.nodeList  = new ArrayList<Integer>();
-        nodeList.add(null);
+        nodeList.add(Integer.MIN_VALUE);
     }
     public void insert(Integer node) {
         this.nodeList.add(node);
@@ -42,7 +42,7 @@ public class Heap {
             nodeList.set(2, temp);
         }
         while(index*2 < nodeList.size()-1) {
-            if(nodeList.get(index) > nodeList.get(index*2)) {
+            if(nodeList.get(index) > nodeList.get(index*2) || nodeList.get(index) > nodeList.get(index*2+1)) {
                 Integer temp = nodeList.get(index);
                 if (nodeList.get(index * 2) > nodeList.get(index * 2 + 1)) {
                     nodeList.set(index, nodeList.get(index*2+1));
@@ -62,5 +62,12 @@ public class Heap {
 
     public ArrayList<Integer> getNodeList() {
         return nodeList;
+    }
+
+    public void printHeap(){
+        for(int i=1; i<nodeList.size(); i++) {
+            System.out.print(nodeList.get(i) +", ");
+        }
+        System.out.println();
     }
 }

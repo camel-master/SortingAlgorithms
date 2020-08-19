@@ -8,11 +8,11 @@ public class Application {
          *  n^2 algorithms : 100000
          *  n Log n algorithms : 10000000;
          */
-        SortingTester sTest = new SortingTester(100000);
+        SortingTester sTest = new SortingTester(5);
 
         //nlogn algorithms
         sTest.sortingTest(SorterType.Heap);
-//        sTest.sortingTest(SorterType.Quick);
+        sTest.sortingTest(SorterType.Quick);
 //        sTest.sortingTest(SorterType.Merge);
 
         //n^2 algorithms

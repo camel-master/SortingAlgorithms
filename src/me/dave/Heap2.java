@@ -5,18 +5,21 @@ import java.util.ArrayList;
 
 // Java implementation of Min Heap
 public class Heap2 {
-    private int[] Heap;
+//    private int[] Heap;
+    private ArrayList<Integer> Heap;
     private int size;
     private int maxsize;
 
     private static final int FRONT = 1;
 
-    public Heap2(int maxsize)
+    public Heap2()
     {
-        this.maxsize = maxsize;
+//        this.maxsize = maxsize;
         this.size = 0;
-        Heap = new int[this.maxsize + 1];
-        Heap[0] = Integer.MIN_VALUE;
+//        Heap = new int[this.maxsize + 1];
+        Heap = new ArrayList<Integer>();
+//        Heap[0] = Integer.MIN_VALUE;
+        Heap.add(0, Integer.MIN_VALUE);
     }
 
     // Function to return the position of
@@ -56,9 +59,12 @@ public class Heap2 {
     private void swap(int fpos, int spos)
     {
         int tmp;
-        tmp = Heap[fpos];
-        Heap[fpos] = Heap[spos];
-        Heap[spos] = tmp;
+//        tmp = Heap[fpos];
+        tmp = Heap.get(fpos);
+//        Heap[fpos] = Heap[spos];
+        Heap.set(fpos, Heap.get(spos));
+//        Heap[spos] = tmp;
+        Heap.set(spos, tmp);
     }
 
     // Function to heapify the node at pos
@@ -68,12 +74,14 @@ public class Heap2 {
         // If the node is a non-leaf node and greater
         // than any of its child
         if (!isLeaf(pos)) {
-            if (Heap[pos] > Heap[leftChild(pos)]
-                    || Heap[pos] > Heap[rightChild(pos)]) {
+//            if (Heap[pos] > Heap[leftChild(pos)]
+            if (Heap.get(pos) > Heap.get(leftChild(pos))
+                    || Heap.get(pos) > Heap.get(rightChild(pos))) {
 
                 // Swap with the left child and heapify
                 // the left child
-                if (Heap[leftChild(pos)] < Heap[rightChild(pos)]) {
+//                if (Heap[leftChild(pos)] < Heap[rightChild(pos)]) {
+                if (Heap.get(leftChild(pos)) < Heap.get(rightChild(pos))) {
                     swap(pos, leftChild(pos));
                     minHeapify(leftChild(pos));
                 }
@@ -91,13 +99,14 @@ public class Heap2 {
     // Function to insert a node into the heap
     public void insert(int element)
     {
-        if (size >= maxsize) {
+//        if (size >= maxsize) {
+        if(size >= Heap.size()) {
             return;
         }
-        Heap[++size] = element;
+        Heap.add(++size,element);
         int current = size;
 
-        while (Heap[current] < Heap[parent(current)]) {
+        while (Heap.get(current) < Heap.get(parent(current))) {
             swap(current, parent(current));
             current = parent(current);
         }
@@ -107,9 +116,9 @@ public class Heap2 {
     public void print()
     {
         for (int i = 1; i <= size / 2; i++) {
-            System.out.print(" PARENT : " + Heap[i]
-                    + " LEFT CHILD : " + Heap[2 * i]
-                    + " RIGHT CHILD :" + Heap[2 * i + 1]);
+            System.out.print(" PARENT : " + Heap.get(i)
+                    + " LEFT CHILD : " + Heap.get(2 * i)
+                    + " RIGHT CHILD :" + Heap.get(2 * i + 1));
             System.out.println();
         }
     }
@@ -127,8 +136,8 @@ public class Heap2 {
     // element from the heap
     public int remove()
     {
-        int popped = Heap[FRONT];
-        Heap[FRONT] = Heap[size--];
+        int popped = Heap.get(FRONT);
+        Heap.set(FRONT,Heap.get(size--));
         minHeapify(FRONT);
         return popped;
     }
